@@ -82,9 +82,6 @@ DATABASES = {
         'PASSWORD': 'isis2503',
         'HOST': '34.170.72.217',
         'PORT': '5432',
-        'OPTIONS': {
-            'CONN_TZ': 'UTC',
-        },
     }
 }
 
