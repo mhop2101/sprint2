@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Paciente(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -19,3 +20,11 @@ class Cita(models.Model):
 
     def __str__(self):
         return f"Cita para {self.paciente} el {self.fecha}"
+    
+class Recurso(models.Model):
+    # El campo 'id' es creado automáticamente por Django como una clave primaria autoincremental, por lo que no necesitas definirlo explícitamente.
+    nombre = models.CharField(max_length=255)
+    cantidad = models.IntegerField()
+
+    def __str__(self):
+        return self.nombre
