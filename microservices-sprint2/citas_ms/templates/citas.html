@@ -19,24 +19,36 @@
     <table class="table">
         <thead>
             <tr>
-            <th scope="col">id</th>
-            <th scope="col">fecha</th>
-            <th scope="col">motivo</th>
-            <th scope="col">notas</th>
+                <th scope="col">ID</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora Inicio</th>
+                <th scope="col">Hora Fin</th>
+                <th scope="col">Motivo</th>
+                <th scope="col">Notas</th>
+                <th scope="col">ID Paciente</th>
             </tr>
         </thead>
         <tbody>
-            {% for cita in citas %}
-            <tr>
-            <th scope="row">{{cita.id}}</th>
-            <td>{{cita.fecha}}</td>
-            <td>{{cita.motivo}}</td>
-            <td>{{cita.notas}}</td>
-            </tr>
-            {% endfor %}
-            
+            {% if citas %}
+                {% for cita in citas %}
+                    <tr>
+                        <th scope="row">{{ cita.id }}</th>
+                        <td>{{ cita.fecha }}</td>
+                        <td>{{ cita.hora_inicio }}</td>
+                        <td>{{ cita.hora_fin }}</td>
+                        <td>{{ cita.motivo }}</td>
+                        <td>{{ cita.notas }}</td>
+                        <td>{{ cita.paciente_id }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="7">No hay citas disponibles</td>
+                </tr>
+            {% endif %}
         </tbody>
-    </table>
+</table>
+
 
     </div>
 
