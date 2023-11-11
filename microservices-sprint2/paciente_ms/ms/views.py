@@ -54,3 +54,6 @@ def pacientes(request):
     # Renderiza un template (por ejemplo, 'pacientes_lista.html') y le pasa los pacientes como contexto.
     return render(request, 'pacientes.html', {'pacientes': todos_pacientes, 'msg':'Todos los pacientes'})
 
+
+def health(request):
+    return JsonResponse({'ok': 'ok'}, status=200)

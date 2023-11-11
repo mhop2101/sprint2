@@ -7,4 +7,6 @@ urlpatterns = [
          name='obtener_todas_citas'),
     path('obtener_citas_paciente/<int:paciente_id>/',
          views.obtener_citas_paciente, name='obtener_citas_paciente'),
+    path('health/',
+         views.health, name='health'),
 ]

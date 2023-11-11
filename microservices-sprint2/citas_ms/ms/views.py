@@ -95,3 +95,6 @@ def obtener_citas_paciente(request, paciente_id):
         return render(request, 'citas.html', {'citas': citas_list, 'msg': msg})
 
     return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+def health(request):
+    return JsonResponse({'ok': 'ok'}, status=200)
