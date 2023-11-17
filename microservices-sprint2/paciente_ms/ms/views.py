@@ -19,7 +19,13 @@ def crear_paciente(request):
         direccion = data.get('direccion', None)
         telefono = data.get('telefono', None)
         email = data.get('email', None)
-
+        
+        integrity_user= data.get('integrity')
+        integrity = abs(hash(nombre + apellido + "my_secret_password"))
+        
+        if integrity != integrity_user:
+            return JsonResponse({'error': 'Integridad de datos comprometida hacker detectado !!!aAAAAA'}, status=400)
+        
         paciente = Paciente(
             nombre=nombre,
             apellido=apellido,

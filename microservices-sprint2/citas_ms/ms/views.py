@@ -22,6 +22,12 @@ def crear_cita(request):
         hora_fin = data.get('hora_fin')
         motivo = data.get('motivo', None)
         notas = data.get('notas', None)
+        
+        integrity_user= data.get('integrity')
+        integrity = abs(hash(motivo + "my_secret_password"))
+        
+        if integrity != integrity_user:
+            return JsonResponse({'error': 'Integridad de datos comprometida hacker detectado !!!aAAAAA'}, status=400)
 
         if not all([paciente_id, fecha, hora_inicio, hora_fin]):
             return JsonResponse({'error': 'Datos faltantes'}, status=400)
