@@ -26,7 +26,7 @@ def crear_cita(request):
         integrity_user= data.get('integrity')
         integrity = abs(hash(motivo + "my_secret_password"))
         
-        if integrity != integrity_user:
+        if str(integrity) != str(integrity_user):
             return JsonResponse({'error': 'Integridad de datos comprometida hacker detectado !!!aAAAAA'}, status=400)
 
         if not all([paciente_id, fecha, hora_inicio, hora_fin]):
