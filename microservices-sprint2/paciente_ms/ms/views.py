@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 import json
+import hashlib
 
 
 # Create your views here.
@@ -21,7 +22,7 @@ def crear_paciente(request):
         email = data.get('email', None)
         
         integrity_user= data.get('integrity')
-        integrity = abs(hash(nombre + apellido + "my_secret_password"))
+        integrity = hashlib.md5(f"{nombre} + my_secret_password".encode('utf-8')).hexdigest()
         
         if integrity != integrity_user:
             return JsonResponse({'error': 'Integridad de datos comprometida hacker detectado !!!aAAAAA'}, status=400)

@@ -6,6 +6,7 @@ from .models import Paciente
 from .models import Cita
 import json
 import requests
+import hashlib
 
 
 @csrf_exempt
@@ -24,7 +25,7 @@ def crear_cita(request):
         notas = data.get('notas', None)
         
         integrity_user= data.get('integrity')
-        integrity = abs(hash(motivo + "my_secret_password"))
+        integrity = hashlib.md5(f"{motivo} + my_secret_password".encode('utf-8')).hexdigest()
         
         print("integrity_user",integrity_user)
         print("integrity",integrity)
