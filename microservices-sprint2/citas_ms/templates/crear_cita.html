@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Cita</title>
+</head>
+<body>
+    <h1>Crear una nueva cita</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="paciente_id">ID del Paciente:</label>
+        <input type="text" id="paciente_id" name="paciente_id"><br><br>
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha"><br><br>
+        <label for="hora_inicio">Hora de Inicio:</label>
+        <input type="time" id="hora_inicio" name="hora_inicio"><br><br>
+        <label for="hora_fin">Hora de Fin:</label>
+        <input type="time" id="hora_fin" name="hora_fin"><br><br>
+        <label for="motivo">Motivo:</label>
+        <textarea id="motivo" name="motivo"></textarea><br><br>
+        <label for="notas">Notas:</label>
+        <textarea id="notas" name="notas"></textarea><br><br>
+        <input type="submit" value="Crear Cita">
+    </form>
+</body>
+</html>

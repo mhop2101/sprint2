@@ -7,6 +7,7 @@ from .models import Cita
 import json
 import requests
 import hashlib
+from datetime import datetime
 
 
 @csrf_exempt
@@ -55,6 +56,56 @@ def crear_cita(request):
         return JsonResponse({'message': 'Cita creada con éxito', 'id': cita.id}, status=201)
 
     return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+def crear_cita_2(request):
+    if request.method == 'POST':
+        
+        paciente_id = request.POST.get('paciente_id')
+        fecha_str = request.POST.get('fecha')
+        hora_inicio_str = request.POST.get('hora_inicio')
+        hora_fin_str = request.POST.get('hora_fin')
+
+        formato_fecha = '%Y-%m-%d'
+        formato_hora = '%H:%M'
+
+        fecha = datetime.strptime(fecha_str, formato_fecha)
+        hora_inicio = datetime.strptime(hora_inicio_str, formato_hora)
+        hora_fin = datetime.strptime(hora_fin_str, formato_hora)
+
+        # Combinar fecha con hora
+        fecha_hora_inicio = fecha.replace(hour=hora_inicio.hour, minute=hora_inicio.minute)
+        fecha_hora_fin = fecha.replace(hour=hora_fin.hour, minute=hora_fin.minute)
+        motivo = request.POST.get('motivo', None)
+        notas = request.POST.get('notas', None)
+
+        # Logica para verificar la integridad de los datos
+        # ...
+
+        if not all([paciente_id, fecha, hora_inicio, hora_fin]):
+            return JsonResponse({'error': 'Datos faltantes'}, status=400)
+
+        try:
+            paciente = Paciente.objects.get(pk=paciente_id)
+        except Paciente.DoesNotExist:
+            return JsonResponse({'error': 'Paciente no encontrado'}, status=404)
+
+        cita = Cita(
+            paciente=paciente,
+            fecha=fecha,
+            hora_inicio=hora_inicio,
+            hora_fin=hora_fin,
+            motivo=motivo,
+            notas=notas
+        )
+        cita.save()
+
+        return JsonResponse({'message': 'Cita creada con éxito', 'id': cita.id}, status=201)
+
+    elif request.method == 'GET':
+        return render(request, 'crear_cita.html')
+
+    else:
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 
 def obtener_todas_citas(request):
