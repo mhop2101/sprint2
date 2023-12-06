@@ -77,14 +77,13 @@ WSGI_APPLICATION = 'citas_ms.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sprint_db',
-        'USER': 'sprint_user',
-        'PASSWORD': 'isis2503',
-        'HOST': '34.170.72.217',
+        'NAME': 'sprint-4-db',
+        'USER': 'sprint-4-db',
+        'PASSWORD': 'sprint-4-db',
+        'HOST': '34.27.182.164',
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
